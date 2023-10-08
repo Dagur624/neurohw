@@ -14,6 +14,12 @@
             font-weight: bold;
             text-align: center;
         }
+        h3 {
+            color: white
+        }
+        p {
+            color: white
+        }
     </style>
     <head>
         <title>Neurohw</title>
@@ -22,5 +28,9 @@
         <h1>
             Умные задания
         </h1>
+        {%for item in news%}
+        <h3>{{item.title}}</h3>
+        <p>{{item.text}}</p>
+        {%endfor%}
     </body>
 </html>
