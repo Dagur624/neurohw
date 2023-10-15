@@ -84,18 +84,33 @@ class StudentParent(models.Model):
         verbose_name= 'Родитель ученика'
         verbose_name_plural = "Родители учеников"
 
+class Theme(models.Model):
+    name = models.CharField("Название темы", max_length=255, default="")
+    code = models.CharField("Код темы", max_length=255, default="")
+    subject = models.ForeignKey(Subject, verbose_name="Предмет темы", on_delete= models.CASCADE)
+    parent = models.ForeignKey("Theme", verbose_name= "Родительский объект", null=True, blank=True, on_delete=models.SET_NULL)
+    def __str__(self) -> str:
+        return self.name  
+    class Meta:
+        verbose_name= 'Тема'
+        verbose_name_plural = "Темы"
+
 class Task(models.Model):
+    name = models.CharField("Название", max_length=255, default="")
     grade = models.IntegerField("Класс")
     level_of_knowledge = models.IntegerField("Уровень знаний")
     task_text = models.TextField("Текст задания")
     answer = models.CharField("Ответ", max_length=255)
     subject = models.ForeignKey(Subject, verbose_name="Предмет", on_delete=models.CASCADE)
+    theme = models.ForeignKey(Theme, verbose_name="Тема", on_delete= models.CASCADE, null=True, blank=True)
     is_neural = models.BooleanField("Написано нейросетью?", default=False)
     def __str__(self) -> str:
-        return self.task_text  
+        return self.name  
     class Meta:
         verbose_name= 'Задание'
         verbose_name_plural = "Задания"
+
+
 
 class StudentTask(models.Model):
     task = models.ForeignKey(Task, verbose_name='Задание', on_delete=models.CASCADE)
