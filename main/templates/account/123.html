@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<h1>Sign up</h1>
+
+<p>Уже есть аккаунт? Тогда <a href="{{ login_url }}">войдите</a>.</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  <form class="signup" id="signup_form" method="post" action="/accounts/signup/">
+    <input type="hidden" name="csrfmiddlewaretoken" value="7YjhM27aUlVQ0EjwJRsd4dlPV78Rjw40UZOCBWV9rokM15dmKEkySs7iNp4gZ4xk">
+    <p>
+      <label for="id_username">Имя пользователя:</label>
+      <input type="text" name="username" placeholder="Имя пользователя" autocomplete="username" minlength="1" maxlength="150" required="" id="id_username">
+      
+      
+    </p>
+  
+    
+    <p>
+      <label for="id_email">E-mail (опционально):</label>
+      <input type="email" name="email" placeholder="E-mail адрес" autocomplete="email" maxlength="320" id="id_email">
+      
+      
+    </p>
+  
+    
+    <p>
+      <label for="id_password1">Пароль:</label>
+      <input type="password" name="password1" placeholder="Пароль" autocomplete="new-password" required="" id="id_password1">
+      
+        <span class="helptext"></span>
+    </p>
+        <ul style="color: white">
+            <li>Пароль не должен быть слишком похож на другую вашу личную информацию.</li>
+            <li>Ваш пароль должен содержать как минимум 8 символов.</li>
+            <li>Пароль не должен быть слишком простым и распространенным.</li>
+            <li>Пароль не может состоять только из цифр.</li>
+        </ul>
+      
+      
+    <p></p>
+  
+
+    <p>
+      <label for="id_password2">Пароль (еще раз):</label>
+      <input type="password" name="password2" placeholder="Пароль (еще раз)" autocomplete="new-password" required="" id="id_password2">
+    </p>
+  </form>
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">Sign Up</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,22 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(blue, green);
+}
+h1 {
+    font-family: Bradley Hand, cursive;
+    color: chocolate;
+    font-weight: bold;
+    text-align: center;
+}
+h3 {
+    color: white
+}
+p {
+    color: white
+}
+a {
+    color: white;
+}

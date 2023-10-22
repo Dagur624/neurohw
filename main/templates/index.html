@@ -1,36 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <style>
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            background: linear-gradient(blue, green);
-        }
-        h1 {
-            font-family: Bradley Hand, cursive;
-            color: chocolate;
-            font-weight: bold;
-            text-align: center;
-        }
-        h3 {
-            color: white
-        }
-        p {
-            color: white
-        }
-    </style>
-    <head>
-        <title>Neurohw</title>
-    </head>
-    <body>
-        <h1>
-            Умные задания
-        </h1>
-        {%for item in news%}
+{% extends 'base.html' %}
+{%block content%} 
+    <a href="{%url 'account_login'%}">Вход</a>       
+    <h1>
+        Умные задания
+    </h1>
+    {%for item in news%}
         <h3>{{item.title}}</h3>
         <p>{{item.text}}</p>
-        {%endfor%}
-    </body>
-</html>
+    {%endfor%}
+{%endblock%}
