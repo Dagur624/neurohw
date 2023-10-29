@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{%block content%}
+    <a href="{%url 'lk'%}" class="floating-button">Назад</a>
+
+    <form method="post">
+        
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">Сохранить</button>
+    </form>
+{%endblock%}

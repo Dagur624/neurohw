@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{%block content%}
+    <a href="{%url 'lk'%}" class="floating-button">Назад</a>
+    <h1>Классы</h1>
+    {%for item in grades%}
+        <hr>
+        <a href="{%url 'teacher_class' item.id%}">{{item.number}} {{item.letter}}</a>
+        
+    {%endfor%}
+{%endblock%}

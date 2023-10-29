@@ -19,4 +19,8 @@ class CustomSignupForm(SignupForm):
         model = models.User
         fields = ('first_name', 'last_name', 'user_type', 'phone_number', "user_school_code",)
 
+class CreateTaskForm(forms.ModelForm):
+    class Meta:
+        model = models.Task
+        fields = ("__all__")
 
