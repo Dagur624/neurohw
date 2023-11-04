@@ -1,6 +1,8 @@
+
 {% extends 'base.html' %}
 {%block content%} 
+        <a href="{%url 'create_task'%}" class="floating-button">Создание</a>
+        <a href="{%url 'teacher_classes'%}" class="floating-button">Классы</a>
+    </nav>
     <h1>Личный кабинет учителя</h1>
-    <a href="{%url 'create_task'%}" class="floating-button">Создание</a>
-    <a href="{%url 'teacher_classes'%}" class="floating-button">Классы</a>
 {%endblock%}

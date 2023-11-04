@@ -4,7 +4,7 @@
     <h1>Классы</h1>
     {%for item in grades%}
         <hr>
-        <a href="{%url 'teacher_class' item.id%}">{{item.number}} {{item.letter}}</a>
+        <a href="{%url 'teacher_class' item.id%}" style="font-size: 30px; font-weight: bold; text-decoration: none;">{{item.number}} {{item.letter}}</a>
         
     {%endfor%}
 {%endblock%}

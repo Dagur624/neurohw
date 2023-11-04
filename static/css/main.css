@@ -3,22 +3,23 @@ html, body {
 }
 
 body {
+    margin: 0px;
     background: url("../images/bg-dark-4785.jpg");
 }
 h1 {
     font-family: Bradley Hand, cursive;
-    color: chocolate;
+    color: Green;
     font-weight: bold;
     text-align: center;
 }
 h3 {
-    color: white
+    color: rgba(255, 255, 255, 0.801)
 }
 p {
-    color: white
+    color: rgba(255, 255, 255, 0.801)
 }
 a {
-    color: white;
+    color: rgba(255, 255, 255, 0.801);
 }
 .floating-button {
     text-decoration: none;
@@ -44,4 +45,7 @@ a {
     box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
     color: white;
     transform: translateY(-7px);
+  }
+  .buttonpanel {
+    background: linear-gradient(green, #0D0D0D);
   }
