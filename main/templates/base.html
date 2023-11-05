@@ -8,15 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        {%if user.is_authenticated%}
-        <nav class="buttonpanel">
-            <a href="{%url 'account_logout'%}" class="floating-button">Выйти</a>
-        
-        {%else%}
-
-        <nav class="buttonpanel">
-          <a href="{%url 'account_login'%}" class="floating-button">Вход</a>
-              {%endif%}
+        {% include "nav.html" %}
         {% block content %}
         
 

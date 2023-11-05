@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {%block content%}
-    
-    <a href="{%url 'teacher_classes'%}" class="floating-button">Назад</a>
-    </nav>
+
+
     <h1>Класс: {{class.number}}{{class.letter}}</h1>
     {%for item in students%}
         <hr>

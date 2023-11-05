@@ -2,7 +2,7 @@ from django.shortcuts import render
 from . import models
 from django.shortcuts import redirect
 from django.urls import reverse
-from .forms import CreateTaskForm
+from . import forms
 def index(request):
     news = models.News.objects.all()
     return render(request, "index.html", {
@@ -32,13 +32,33 @@ def create_task(request):
     
     if request.method == "POST":
         print("POST")
-        form = CreateTaskForm(request.POST)
+        form = forms.CreateTaskForm(request.POST)
         if form.is_valid():
             print("valid")
             form.save()
             return redirect(reverse("lk"))
     else:
-        form = CreateTaskForm()
+        form = forms.CreateTaskForm()
+    return render(request, "create_task.html", {
+        "form":form
+    })
+    
+def give_task(request):
+    if request.method == "POST":
+        print("POST")
+        form = forms.GiveTaskForm(request.POST)
+        if form.is_valid():
+            print("valid")
+            for student_id in form.cleaned_data["students"]:
+                student_task_primer = form.save(commit = False)
+                student = models.Student.objects.get(id = student_id)
+                student_task = models.StudentTask(limite_date = student_task_primer.limite_date, student = student, 
+                                                  teacher = models.Teacher.objects.get(id = request.user.id), 
+                                                  task_id = student_task_primer.task_id)
+                student_task.save()
+            return redirect(reverse("lk"))
+    else:
+        form = forms.GiveTaskForm()
     return render(request, "create_task.html", {
         "form":form
     })

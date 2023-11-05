@@ -24,3 +24,9 @@ class CreateTaskForm(forms.ModelForm):
         model = models.Task
         fields = ("__all__")
 
+class GiveTaskForm(forms.ModelForm):
+    students = forms.MultipleChoiceField(label="Ученики", choices= models.Student.objects.values_list('id', 'user__first_name'))
+    class Meta:
+        model = models.StudentTask
+        fields = ("task", "limite_date")
+
