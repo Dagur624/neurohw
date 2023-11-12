@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {%block content%}
-
-
     <h1>Класс: {{class.number}}{{class.letter}}</h1>
     {%for item in students%}
         <hr>
-        <a>{{item.user.first_name}} {{item.user.last_name}}</a>
+        <a href ="{% url "student_task_list_teacher" item.id%}">{{item.user.first_name}} {{item.user.last_name}}</a>
 
     {%endfor%}    
 {%endblock%}

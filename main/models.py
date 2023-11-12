@@ -100,10 +100,11 @@ class Task(models.Model):
     grade = models.IntegerField("Класс")
     level_of_knowledge = models.IntegerField("Уровень знаний")
     task_text = models.TextField("Текст задания")
-    answer = models.CharField("Ответ", max_length=255)
+    answer = models.CharField("Ответ", max_length=255, null=True, blank= True)
     subject = models.ForeignKey(Subject, verbose_name="Предмет", on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, verbose_name="Тема", on_delete= models.CASCADE, null=True, blank=True)
     is_neural = models.BooleanField("Написано нейросетью?", default=False)
+    teacher_check = models.BooleanField("Нужна проверка?", default=False)
     def __str__(self) -> str:
         return self.name  
     class Meta:
@@ -121,6 +122,7 @@ class StudentTask(models.Model):
     teacher_check = models.BooleanField("Нужна проверка?", default=False)
     teaher_comment = models.TextField("Комментарий учителя")
     get_date = models.DateTimeField("Дата выдачи", auto_now_add=True)
+    done_date = models.DateTimeField("Дата выполнения", null=True, blank=True)
     limite_date = models.DateTimeField("Лимит выполнения")
     def __str__(self) -> str:
         return str(self.task) + "<->" + str(self.student)

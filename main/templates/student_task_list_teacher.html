@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{student.user.first_name}} {{student.user.last_name}}</h1>
+    {% for task in tasks %}
+        <div class="tasklist" style="{% if  task.is_right%}background-color: #98FB98{% else %}background-color: #FA8072{% endif %}">
+            <div class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</div>
+            <br>
+            <br>
+            <div class="oneLine">Ответ ученика: {{task.student_answer}}</div>
+            <div class="oneLine">|       Реальный ответ: {{task.task.answer}}</div>
+            <div class="oneLine">|       Дата выполнения: {{task.done_date}}</div>
+            <div class="oneLine">|       Лимит выполнения: {{task.limite_date}}</div>
+            <div class="oneLine">|       <a class="btn btn-primary" href= "">Ссылка</a></div>
+        </div>
+    {% endfor %}
+{% endblock %}

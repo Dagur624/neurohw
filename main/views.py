@@ -62,5 +62,13 @@ def give_task(request):
     return render(request, "create_task.html", {
         "form":form
     })
-        
+
+def student_task_list_teacher(request, student_id):
+    student = models.Student.objects.get(id = student_id)
+    tasks = models.StudentTask.objects.filter(student__id = student_id)
+    return render(request, "student_task_list_teacher.html", {
+        "tasks":tasks,
+        "student":student
+    })
+      
 # Create your views here.
