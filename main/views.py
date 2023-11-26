@@ -70,5 +70,6 @@ def student_task_list_teacher(request, student_id):
         "tasks":tasks,
         "student":student
     })
-      
-# Create your views here.
+    
+    
+# Createe your views here.

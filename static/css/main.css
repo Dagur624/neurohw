@@ -62,4 +62,6 @@ a {
   .oneLine {
     display: inline-block;
   }
-  
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
