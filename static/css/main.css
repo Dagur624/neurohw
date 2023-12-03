@@ -65,3 +65,12 @@ a {
 * {
     font-family: 'Times New Roman', Times, serif;
 }
+.task-description {
+  font-size:20px;
+}
+.videlenie {
+  border: solid 3px black; 
+  width: fit-content; 
+  padding: 3px;
+  margin: 2px
+}

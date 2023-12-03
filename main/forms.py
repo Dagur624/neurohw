@@ -30,3 +30,8 @@ class GiveTaskForm(forms.ModelForm):
         model = models.StudentTask
         fields = ("task", "limite_date")
 
+class CheckTaskForm(forms.ModelForm):
+    class Meta:
+        model = models.StudentTask
+        fields = ("is_right", "teaher_comment")
+

@@ -120,10 +120,10 @@ class StudentTask(models.Model):
     student_answer = models.TextField("Ответ ученика")
     is_right = models.BooleanField("Правильно?", blank=True, null=True)
     teacher_check = models.BooleanField("Нужна проверка?", default=False)
-    teaher_comment = models.TextField("Комментарий учителя")
+    teaher_comment = models.TextField("Комментарий учителя", blank=True, null=True)
     get_date = models.DateTimeField("Дата выдачи", auto_now_add=True)
     done_date = models.DateTimeField("Дата выполнения", null=True, blank=True)
-    limite_date = models.DateTimeField("Лимит выполнения")
+    limite_date = models.DateTimeField("Лимит выполнения", null=True, blank=True)
     def __str__(self) -> str:
         return str(self.task) + "<->" + str(self.student)
     class Meta:

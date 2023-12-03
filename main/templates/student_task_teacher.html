@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content  %}
+    <h1>{{task.task.name}} от ученика {{task.student.user.first_name}} {{task.student.user.last_name}}</h1>
+    <br>
+    <div class="task-description">Текст задания:<p class="videlenie">{{task.task.task_text}}</p></div>
+    <div class="task-description">Ответ ученика: <p class="videlenie">{{task.student_answer}}</p></div>
+    <div class="task-description">Реальный ответ: <p class="videlenie">{{task.task.answer}}</p></div>
+    <div class="task-description">Дата выполнения: <p class="videlenie">{{task.done_date}}</p></div>
+    <div class="task-description">Лимит выполнения: <p class="videlenie">{{task.limite_date}}</p></div>
+    <div class="task-description">Правильно? {% if task.is_right %}<p class="videlenie" style="color:green; border-color: green;">Да</p>{% else %}<p class="videlenie" style="color:red; border-color: red;">Нет</p>{% endif %}</div>
+    <form method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">Сохранить</button>
+    </form>
+
+{% endblock %}

@@ -10,7 +10,7 @@
             <div class="oneLine">|       Реальный ответ: {{task.task.answer}}</div>
             <div class="oneLine">|       Дата выполнения: {{task.done_date}}</div>
             <div class="oneLine">|       Лимит выполнения: {{task.limite_date}}</div>
-            <div class="oneLine">|       <a class="btn btn-primary" href= "">Ссылка</a></div>
+            <div class="oneLine">|       <a class="btn btn-primary" href= "{% url "student_task_teacher" task.id%}">Ссылка</a></div>
         </div>
     {% endfor %}
 {% endblock %}

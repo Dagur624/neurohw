@@ -45,10 +45,8 @@ def create_task(request):
     
 def give_task(request):
     if request.method == "POST":
-        print("POST")
         form = forms.GiveTaskForm(request.POST)
         if form.is_valid():
-            print("valid")
             for student_id in form.cleaned_data["students"]:
                 student_task_primer = form.save(commit = False)
                 student = models.Student.objects.get(id = student_id)
@@ -57,8 +55,7 @@ def give_task(request):
                                                   task_id = student_task_primer.task_id)
                 student_task.save()
             return redirect(reverse("lk"))
-    else:
-        form = forms.GiveTaskForm()
+    form = forms.GiveTaskForm()
     return render(request, "create_task.html", {
         "form":form
     })
@@ -70,6 +67,29 @@ def student_task_list_teacher(request, student_id):
         "tasks":tasks,
         "student":student
     })
-    
-    
-# Createe your views here.
+def student_task_teacher(request, task_id):
+    task = models.StudentTask.objects.get(id = task_id)
+    if request.method == "POST":
+        form = forms.CheckTaskForm(request.POST, instance = task)
+        if form.is_valid():
+            form.save()
+    form = forms.CheckTaskForm(instance = task)
+    return render(request, "student_task_teacher.html", {
+        "task":task,
+        "form":form
+    })
+
+def student_task_list(request):
+    student = models.Student.objects.get(user = request.user)
+    tasks = models.StudentTask.objects.filter(student = student)
+    task_uncomplete = tasks.filter(student_answer = "")
+    task_complete = tasks.exclude(student_answer = "").filter(is_right = None)
+    task_check = tasks.exclude(is_right = None)
+    return render(request, "student_task_list.html", {
+        "student": student,
+        "task_uncomplete":task_uncomplete,
+        "task_complete":task_complete,
+        "task_check":task_check
+    })
+
+# Create your views here.

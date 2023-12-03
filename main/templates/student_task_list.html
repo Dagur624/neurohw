@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Список заданий</h1>
+    <br>
+    {% for task in task_uncomplete %}
+        <div class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</div>
+        <br>
+        <div class="oneLine">Текст задания:{{task.task.task_text}}</div>
+        <br>
+    {% endfor %}
+    {% for task in task_complete %}
+        <div class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</div>
+        <br>
+        <div class="oneLine">Текст задания:{{task.task.task_text}}</div>
+        <br>
+    {% endfor %}
+    {% for task in task_check %}
+        <div class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</div>
+        <br>
+        <div class="oneLine">Текст задания:{{task.task.task_text}}</div>
+        <br>
+    {% endfor %}
+{% endblock content %}

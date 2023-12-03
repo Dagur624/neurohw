@@ -12,13 +12,16 @@
         {%endif%}
     {% endif %}
     {%if user.user_type.code == "teacher"%}
-        
         <a href="{%url 'create_task'%}" class="floating-button">Создание</a>
         <a href="{%url 'teacher_classes'%}" class="floating-button">Классы</a>
         <a href="{% url "give_task" %}" class="floating-button">Выдача</a>
-        <a onclick="javascript:history.back(); return false;" class="floating-button">Назад</a>
-    {% endif %}
-
         
+    {% endif %} 
+    {%if user.user_type.code == "student"%}
+        <a href={% url "student_task_list" %} class="floating-button">Задания</a>
+        <a href="" class="floating-button">Мои учителя</a>
+        <a href="" class="floating-button">Результаты</a> 
+    {%endif%}
+    <a onclick="javascript:history.back(); return false;" class="floating-button">Назад</a>
 </nav>
 {% endblock  %}
