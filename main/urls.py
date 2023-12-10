@@ -11,5 +11,5 @@ urlpatterns = [
     path("lk/give_task", views.give_task, name= "give_task"),
     path("lk/teacher_classes/student_task_list/<int:student_id>", views.student_task_list_teacher, name = "student_task_list_teacher"),
     path("lk/teacher_classes/student_task/<int:task_id>", views.student_task_teacher, name="student_task_teacher"),
-    path("lk/student_task_list", views.student_task_list, name="student_task_list")
+    path("lk/student_task_list/<int:status>", views.student_task_list, name="student_task_list")
 ]

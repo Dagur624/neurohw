@@ -2,22 +2,30 @@
 {% block content %}
     <h1>Список заданий</h1>
     <br>
-    {% for task in task_uncomplete %}
-        <div class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</div>
-        <br>
-        <div class="oneLine">Текст задания:{{task.task.task_text}}</div>
-        <br>
-    {% endfor %}
-    {% for task in task_complete %}
-        <div class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</div>
-        <br>
-        <div class="oneLine">Текст задания:{{task.task.task_text}}</div>
-        <br>
-    {% endfor %}
-    {% for task in task_check %}
-        <div class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</div>
-        <br>
-        <div class="oneLine">Текст задания:{{task.task.task_text}}</div>
-        <br>
+    <div class="">
+        <a href="{% url "student_task_list" 0 %}" class="btn btn-primary {% if status == 0 %}disabled{% endif %}" >Несделанные задания</a>
+        <a href="{% url "student_task_list" 1 %}" class="btn btn-primary {% if status == 1 %}disabled{% endif %}" >Непроверенные задания</a>
+        <a href="{% url "student_task_list" 2 %}" class="btn btn-primary {% if status == 2 %}disabled{% endif %}" >Проверенные задания</a>
+        <div class="dropdown oneLine">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Предметы
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for subject in subjects %}
+                    <a class="dropdown-item" href="{% url "student_task_list" status %}?subject={{subject.code}}">{{subject.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+
+    {% for task in tasks %}
+        <div class="tasklist" style="{% if status == 2 %} {% if task.is_right == True %}background-color: #98FB98 {% else %}background-color: #FA8072{% endif %} {% elif status == 1 %} background-color: #F0E68C{% endif %}">
+            <a class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</a>
+            <br>
+            <div class="oneLine">Текст задания: {{task.task.task_text}}</div>
+            <br>
+
+        </div>
     {% endfor %}
 {% endblock content %}

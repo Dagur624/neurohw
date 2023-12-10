@@ -79,17 +79,24 @@ def student_task_teacher(request, task_id):
         "form":form
     })
 
-def student_task_list(request):
+def student_task_list(request, status):
+    subject_checked = request.GET.get("subject")
     student = models.Student.objects.get(user = request.user)
     tasks = models.StudentTask.objects.filter(student = student)
-    task_uncomplete = tasks.filter(student_answer = "")
-    task_complete = tasks.exclude(student_answer = "").filter(is_right = None)
-    task_check = tasks.exclude(is_right = None)
+    if subject_checked:
+        tasks = tasks.filter(task__subject__code = subject_checked)
+    if status == 0: #Не сделано
+        tasks = tasks.filter(student_answer = "")
+    elif status == 1: #Сделано, но не проверено
+        tasks = tasks.exclude(student_answer = "").filter(is_right = None)
+    elif status == 2: #Сделано и проверено
+        tasks = tasks.exclude(is_right = None)
+    subjects = models.Subject.objects.all()
     return render(request, "student_task_list.html", {
         "student": student,
-        "task_uncomplete":task_uncomplete,
-        "task_complete":task_complete,
-        "task_check":task_check
+        "tasks":tasks,
+        "status":status,
+        "subjects":subjects
     })
 
 # Create your views here.
