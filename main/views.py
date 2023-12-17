@@ -98,5 +98,29 @@ def student_task_list(request, status):
         "status":status,
         "subjects":subjects
     })
+    
+def student_task_do(request, student_task_id = 0):
+    if student_task_id != 0:
+        student_task = models.StudentTask.objects.get(id = student_task_id)
+    else:
+        student_task = models.StudentTask.objects.filter(student__user__id = request.user.id, student_answer = "").first()
+        if not student_task:
+            return redirect(reverse('student_task_list', args=[0]))
+    if request.method == "POST":
+        form = forms.DoTaskForm(request.POST, instance = student_task)
+        if form.is_valid():
+            save_task = form.save(commit=False)
+            if  save_task.teacher_check == False:
+                
+                if save_task.student_answer == save_task.task.answer:
+                    save_task.is_right = True
+                else:
+                    save_task.is_right = False
+            save_task.save()
+    form = forms.DoTaskForm(instance= student_task)
+    return render(request, "student_task_do.html", {
+        "student_task": student_task,
+        "form":form
+    })
 
 # Create your views here.

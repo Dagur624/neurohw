@@ -35,3 +35,11 @@ class CheckTaskForm(forms.ModelForm):
         model = models.StudentTask
         fields = ("is_right", "teaher_comment")
 
+class DoTaskForm(forms.ModelForm):
+    class Meta:
+        model = models.StudentTask
+        fields = ("student_answer",)
+        labels = {
+            "student_answer": "Введите ответ:"
+        }
+

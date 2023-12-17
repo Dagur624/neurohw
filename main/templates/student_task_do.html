@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{student_task.task.name}}</h1>
+    <br>
+    
+    <div class="task_do">
+        <p>{{student_task.task.task_text}}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if not student_task.teacher_check and student_task.student_answer != ""%}
+                {% if student_task.student_answer != student_task.task.answer %}
+                    <div>Неправильный ответ.</div>
+                    {% else %}
+                    <div>Правильный ответ!</div>
+                    
+                {% endif %}
+                
+                <a class="btn btn-primary" href="{% url "student_task_do" 0 %}">Следующее задание</a>
+            
+            {% endif %}
+            <button class="btn btn-primary" type="submit"{% if student_task.teacher_check and student_task.student_answer != "" %} disabled{% endif %}>Сохранить</button>
+            <a class="btn btn-primary" href="{% url "student_task_list" 0 %}">Вернуться к списку заданий</a>
+
+        </form>
+    </div>
+    
+{% endblock %}

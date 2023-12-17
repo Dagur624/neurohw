@@ -21,7 +21,7 @@
 
     {% for task in tasks %}
         <div class="tasklist" style="{% if status == 2 %} {% if task.is_right == True %}background-color: #98FB98 {% else %}background-color: #FA8072{% endif %} {% elif status == 1 %} background-color: #F0E68C{% endif %}">
-            <a class="oneLine" style="font-size:1.5rem; font-weight:bold">{{task.task.name}}</a>
+            <a class="oneLine" style="font-size:1.5rem; font-weight:bold" href="{% url "student_task_do" task.id %}">{{task.task.name}}</a>
             <br>
             <div class="oneLine">Текст задания: {{task.task.task_text}}</div>
             <br>
