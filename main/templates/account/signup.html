@@ -8,7 +8,7 @@
 <h1>Регистрация</h1>
 
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+<form class="signup" id="signup_form" method="post" >
   {% csrf_token %}
   {{ form.as_p }}
   {% if redirect_field_value %}
@@ -16,5 +16,21 @@
   {% endif %}
   <button type="submit">{% trans "Sign Up" %} &raquo;</button>
 </form>
-
+<script>
+  grade_element = document.getElementById('id_grade')
+  user_type_element = document.getElementById("id_user_type")
+  grade_element.parentElement.style.display = 'none'
+  user_type_element.addEventListener("change", usertypechange)
+  
+  function usertypechange(element) {
+    const select = element.target;
+    const value = select.value;
+    const desc = select.options[select.selectedIndex].text;
+    if (desc == "Ученик") {
+      grade_element.parentElement.style.display = 'block'
+    } else {
+      grade_element.parentElement.style.display = 'none'
+    }
+  }
+</script>
 {% endblock content %}

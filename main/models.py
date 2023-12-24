@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -31,7 +32,7 @@ class Grade(models.Model):
 class Student(models.Model):
     user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE, unique=True)
     grade = models.ForeignKey(Grade, verbose_name="Класс", on_delete=models.CASCADE)
-    level_of_knowledge = models.IntegerField("Уровень знаний")
+    level_of_knowledge = models.IntegerField("Уровень знаний", default=0)
     def __str__(self) -> str:
         return str(self.user)
     class Meta:

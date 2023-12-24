@@ -123,4 +123,28 @@ def student_task_do(request, student_task_id = 0):
         "form":form
     })
 
+def student_teacher_list(request):
+    teachers = models.Teacher.objects.all()
+    print(teachers)
+    return render(request, "student_teacher_list.html", {
+        "teachers": teachers
+    })
+
+def signup(request):
+    if request.method == "POST":
+        form = forms.CustomSignupForm(request.POST)
+        if form.is_valid():
+            grade_id = form['grade'].value()
+            print(grade_id)
+            account = form.save(request)
+            if account.user_type.code == "teacher":
+                models.Teacher(user = account).save()
+            if account.user_type.code == "student":
+                grade = models.Grade.objects.get(id = grade_id)
+                models.Student(user = account, grade = grade).save()
+            return redirect(reverse("account_login"))
+    form = forms.CustomSignupForm()
+    return render(request, "account/signup.html", {
+        'form':form
+    })
 # Create your views here.
