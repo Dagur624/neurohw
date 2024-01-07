@@ -1,0 +1,132 @@
+[
+  {
+    "model": "user",
+    "pk": 1,
+    "fields": {
+      "username": "ivanov_87",
+      "password": "pbkdf2_sha256$260000$yfZ8l9Y7vQ0x4X1pG4L0Jw$FqX0a0Z6tJ1U4L3zH4zOZ2mW5gZ3wZl0jZs4x8Z0Zs0=",
+      "phone_number": "+79123456789",
+      "first_name": "Иван",
+      "last_name": "Иванов",
+      "email": "ivanov_87@mail.ru",
+      "user_type_id": 1
+    }
+  },
+  {
+    "model": "user",
+    "pk": 2,
+    "fields": {
+      "username": "petrova_92",
+      "password": "pbkdf2_sha256$260000$0yN8x9X7wQ1y4Y2pH5L1Kw$GqY1b1Y7tK2V5M4zI5zPZ3nW6hZ4xZm1kZt5y9Z1Zs1=",
+      "phone_number": "+79234567890",
+      "first_name": "Елена",
+      "last_name": "Петрова",
+      "email": "petrova_92@mail.ru",
+      "user_type_id": 2
+    }
+  },
+  {
+    "model": "user",
+    "pk": 3,
+    "fields": {
+      "username": "smirnov_95",
+      "password": "pbkdf2_sha256$260000$1zO9y0Y8xQ2y5Z3pI6L2Lw$HrZ2c2Z8tL3W6N5zJ6zQZ4oW7iZ5yZn2lZu6x0Z2Zs2=",
+      "phone_number": "+79345678901",
+      "first_name": "Алексей",
+      "last_name": "Смирнов",
+      "email": "smirnov_95@mail.ru",
+      "user_type_id": 3
+    }
+  },
+  {
+    "model": "user",
+    "pk": 4,
+    "fields": {
+      "username": "kuznetsova_88",
+      "password": "pbkdf2_sha256$260000$2pQ0z1Z9yQ3y6A4pJ7L3Mw$IqZ3d3Z9tM4X7O6zK7zRZ5pW8jZ6yZo3mZv7y1Z3Zs3=",
+      "phone_number": "+79456789012",
+      "first_name": "Мария",
+      "last_name": "Кузнецова",
+      "email": "kuznetsova_88@mail.ru",
+      "user_type_id": 1
+    }
+  },
+  {
+    "model": "user",
+    "pk": 5,
+    "fields": {
+      "username": "popov_91",
+      "password": "pbkdf2_sha256$260000$3rR1z2A0yQ4y7B5pK8L4Nw$JrZ4e4Z0tN5Y8P7zL8zSZ6qW9kZ7yZp4nZw8y2Z4Zs4=",
+      "phone_number": "+79567890123",
+      "first_name": "Дмитрий",
+      "last_name": "Попов",
+      "email": "popov_91@mail.ru",
+      "user_type_id": 2
+    }
+  },
+  {
+    "model": "user",
+    "pk": 6,
+    "fields": {
+      "username": "sidorova_89",
+      "password": "pbkdf2_sha256$260000$4sS2z3B1yQ5y8C6pL9L5Ow$KrZ5f5Z1tO6Z9Q8zM9zTZ7rW0lZ8yZq5oZx9y3Z5Zs5=",
+      "phone_number": "+79678901234",
+      "first_name": "Анна",
+      "last_name": "Сидорова",
+      "email": "sidorova_89@mail.ru",
+      "user_type_id": 3
+    }
+  },
+  {
+    "model": "user",
+    "pk": 7,
+    "fields": {
+      "username": "novikov_93",
+      "password": "pbkdf2_sha256$260000$5tT3z4C2yQ6y9D7pM0L6Pw$LrZ6g6Z2tP7A0R9zM0zUZ8sW1mZ9yZr6pZy0y4Z6Zs6=",
+      "phone_number": "+79789012345",
+      "first_name": "Сергей",
+      "last_name": "Новиков",
+      "email": "novikov_93@mail.ru",
+      "user_type_id": 1
+    }
+  },
+  {
+    "model": "user",
+    "pk": 8,
+    "fields": {
+      "username": "morozova_90",
+      "password": "pbkdf2_sha256$260000$6uU4z5D3yQ7y0E8pN1L7Qw$MrZ7h7Z3tQ8B1S0zN1zVZ9tW2nZ0yZs7qZz1y5Z7Zs7=",
+      "phone_number": "+79890123456",
+      "first_name": "Ольга",
+      "last_name": "Морозова",
+      "email": "morozova_90@mail.ru",
+      "user_type_id": 2
+    }
+  },
+  {
+    "model": "user",
+    "pk": 9,
+    "fields": {
+      "username": "orlov_94",
+      "password": "pbkdf2_sha256$260000$7vV5z6E4yQ8y1F9pO2L8Rw$NrZ8i8Z4tR9C2T1zO2zWZ0uW3oZ1yZt8rZ0y6Z8Zs8=",
+      "phone_number": "+79901234567",
+      "first_name": "Владимир",
+      "last_name": "Орлов",
+      "email": "orlov_94@mail.ru",
+      "user_type_id": 3
+    }
+  },
+  {
+    "model": "user",
+    "pk": 10,
+    "fields": {
+      "username": "vasilieva_96",
+      "password": "pbkdf2_sha256$260000$8wW6z7F5yQ9y2G0pP3L9Sw$OrZ9j9Z5tS0D3U2zP3zXZ1vW4pZ2yZu9sZ1y7Z9Zs9=",
+      "phone_number": "+79012345678",
+      "first_name": "Ирина",
+      "last_name": "Васильева",
+      "email": "vasilieva_96@mail.ru",
+      "user_type_id": 1
+    }
+  }
+]

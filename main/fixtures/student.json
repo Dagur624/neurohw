@@ -1,0 +1,38 @@
+[
+  {
+    "model": "main.usertype",
+    "pk": 1,
+    "fields": {
+      "level_of_knowledge": 0,
+      "grade_id": 0,
+      "user_id": 1
+    }
+  },
+    {
+    "model": "main.usertype",
+    "pk": 2,
+    "fields": {
+      "level_of_knowledge": 0,
+      "grade_id": 0,
+      "user_id": 4
+    }
+  },
+    {
+    "model": "main.usertype",
+    "pk": 3,
+    "fields": {
+      "level_of_knowledge": 0,
+      "grade_id": 0,
+      "user_id": 7
+    }
+  },
+  {
+    "model": "main.usertype",
+    "pk": 4,
+    "fields": {
+      "level_of_knowledge": 0,
+      "grade_id": 0,
+      "user_id": 10
+    }
+  }
+]

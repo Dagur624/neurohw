@@ -1,0 +1,26 @@
+[
+  {
+    "model": "main.usertype",
+    "pk": 1,
+    "fields": {
+      "name": "Ученик",
+      "code": "student"
+    }
+  },
+  {
+    "model": "main.usertype",
+    "pk": 2,
+    "fields": {
+      "name": "Учитель",
+      "code": "teacher"
+    }
+  },
+  {
+    "model": "main.usertype",
+    "pk": 3,
+    "fields": {
+      "name": "Родитель",
+      "code": "parent"
+    }
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "model": "main.usertype",
+    "pk": 1,
+    "fields": {
+      "user_id": 2
+    }
+  },
+    {
+    "model": "main.usertype",
+    "pk": 1,
+    "fields": {
+      "user_id": 5
+    }
+  },
+    {
+    "model": "main.usertype",
+    "pk": 1,
+    "fields": {
+      "user_id": 8
+    }
+  }
+]
