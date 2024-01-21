@@ -74,3 +74,8 @@ a {
   padding: 3px;
   margin: 2px
 }
+.s-t-len {
+    font-size: 30px;
+    font-weight: bold;
+    color: darkred;
+}
