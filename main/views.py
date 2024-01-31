@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from . import forms
 from datetime import date, datetime, timedelta
+from . import utils
 
 
 def index(request):
@@ -23,19 +24,24 @@ def lk(request):
         return render(request, "lk_teacher.html")
 
 
-def teacher_class(request):
+def teacher_class_list(request):
     grades = models.Grade.objects.all()
-    return render(request, "teacher_class.html", {
+    return render(request, "teacher_class_list.html", {
         "grades": grades
     })
 
 
-def class1(request, id):
-    class1 = models.Grade.objects.get(id=id)
+def teacher_class(request, id):
+    grade = models.Grade.objects.get(id=id)
     students = models.Student.objects.filter(grade__id=id)
-    return render(request, "class1.html", {
-        "class": class1,
-        "students": students
+    students_dict = []
+    start_date = datetime.today() - timedelta(days=60)
+    for student in students:
+        students_dict.append({"student": student, **utils.student_result_base(student.user, start_date)})
+    return render(request, "teacher_class.html", {
+        "class": grade,
+        "students": students_dict,
+
     })
 
 
@@ -168,31 +174,19 @@ def signup(request):
 
 
 def student_result(request):
-    student_tasks_right = ""
-    student_tasks_wrong = ""
-    student_tasks_len = ""
-    student_tasks_no_check = ""
+    student_tasks = {}
     date_format = '%d.%m.%Y'
     if request.method == "POST":
         form = forms.ResultDateForm(request.POST)
         if form.is_valid():
             start_date = form.cleaned_data["start_date"]
             end_date = form.cleaned_data["end_date"]
-            student_tasks = models.StudentTask.objects.filter(student__user=request.user).filter(
-                get_date__gte=start_date,
-                get_date__lte=end_date)
-            student_tasks_right = student_tasks.filter(is_right=True).count()
-            student_tasks_wrong = student_tasks.filter(is_right=False).count()
-            student_tasks_len = len(student_tasks)
-            student_tasks_no_check = student_tasks_len - student_tasks_right - student_tasks_wrong
+            student_tasks = utils.student_result_base(request.user, start_date, end_date)
     else:
         form = forms.ResultDateForm()
     return render(request, "student_result.html", {
         'form': form,
-        'student_tasks_right': student_tasks_right,
-        "student_tasks_wrong": student_tasks_wrong,
-        'student_tasks_len': student_tasks_len,
-        'student_tasks_no_check': student_tasks_no_check
+        **student_tasks
     })
 
 # Create your views here.

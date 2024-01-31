@@ -58,8 +58,8 @@ class DoTaskForm(forms.ModelForm):
 
 
 class ResultDateForm(forms.Form):
-    start_date = forms.DateField(label="start_date", widget=forms.widgets.DateInput(
+    start_date = forms.DateField(label="Начальная дата поиска", widget=forms.widgets.DateInput(
         attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control'}))
-    end_date = forms.DateField(label="end_date", widget=forms.widgets.DateInput(
+    end_date = forms.DateField(label="Конечная дата поиска", widget=forms.widgets.DateInput(
         attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control'}))
 
