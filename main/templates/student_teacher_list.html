@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Твои учителя</h1>
-{% for teacher in teachers %}
-    
-    <ul class='list-group' style="width: 15%">
-        <li class="list-group-item">{{ forloop.counter }}</li>
-        <li class="list-group-item active">{{teacher.user.first_name}} {{teacher.user.last_name}}</li>
-        <li class="list-group-item">{{teacher.user.username}}</li>
-        {% if teacher.user.phone_number %}<li class='list-group-item'>{{teacher.user.phone_number}}</li>{% endif %}
-    </ul>
-    <br>
-{% endfor %}
+    <h1>Твои учителя</h1>
+    <table class="table table-bordered" style="width: fit-content">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for teacher in teachers %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ teacher.user.first_name }}</td>
+                <td>{{ teacher.user.last_name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

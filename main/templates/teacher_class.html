@@ -17,16 +17,16 @@
         {% for item in students %}
             <tr>
                 <th scope="col">{{ forloop.counter }}</th>
-                <th scope="col"><a
+                <td><a
                         href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.first_name }}</a>
-                </th>
-                <th scope="col"><a
+                </td>
+                <td><a
                         href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.last_name }}</a>
-                </th>
-                <th scope="col">{{ item.student_tasks_len }}</th>
-                <th scope="col" class="table-success">{{ item.student_tasks_right }}</th>
-                <th scope="col" class="table-danger">{{ item.student_tasks_wrong }}</th>
-                <th scope="col" class="table-warning">{{ item.student_tasks_no_check }}</th>
+                </td>
+                <td>{{ item.student_tasks_len }}</td>
+                <td class="table-success">{{ item.student_tasks_right }}</td>
+                <td class="table-danger">{{ item.student_tasks_wrong }}</td>
+                <td class="table-warning">{{ item.student_tasks_no_check }}</td>
 
             </tr>
         {% endfor %}

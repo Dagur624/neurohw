@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
-{%block content%}
+{% block content %}
     <h1>Классы</h1>
-    {%for item in grades%}
-        <hr>
-        <a href="{%url 'teacher_class' item.id%}" style="color: blue; font-size: 30px; font-weight: bold; text-decoration: none;">{{item.number}} {{item.letter}}</a>
-        
-    {%endfor%}
-{%endblock%}
+    <table class="table table-bordered" id="table" >
+        <thead>
+        <tr>
+            <th scope="col">Номер класса</th>
+            <th scope="col">Буква класса</th>
+        </tr>
+
+        {% for item in grades %}
+            <tbody>
+            <tr>
+                <td><a href="{% url 'teacher_class' item.id %}">{{ item.number }}</a></td>
+                <td><a href="{% url 'teacher_class' item.id %}">{{ item.letter }}</a></td>
+            </tr>
+            </tbody>
+
+        {% endfor %}
+    </table>
+{% endblock %}
