@@ -120,6 +120,7 @@ class Theme(models.Model):
     subject = models.ForeignKey(Subject, verbose_name="Предмет темы", on_delete=models.CASCADE)
     parent = models.ForeignKey("Theme", verbose_name="Родительский объект", null=True, blank=True,
                                on_delete=models.SET_NULL)
+    grade = models.IntegerField("Класс", default=0)
 
     def __str__(self) -> str:
         return self.name

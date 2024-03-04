@@ -2,6 +2,6 @@
 {%block content%}
     <h1>{{ lesson.title }}</h1>
     <div>
-        <p>{{ lesson.text }}</p>
+        <p>{{ lesson.text|safe }}</p>
     </div>
 {%endblock%}

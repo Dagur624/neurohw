@@ -3,7 +3,16 @@
     <h1>Учебный материал</h1>
     <ul>
         {% for item in object_list %}
-            <li><a href="{% url 'lesson' item.id %}">{{ item.name }}</a></li>
+            <li><a href=
+            "
+            {% if item.parent %}
+                {% url 'lesson' item.id %}
+            {% else %}
+                {% url 'educational_materials_subject' grade item.subject.id %}?themes_id={{ item.id }}
+            {% endif %}
+            ">
+
+                {{ item.name }}</a></li>
         {% endfor %}
     </ul>
 {%endblock%}

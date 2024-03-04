@@ -5,7 +5,7 @@ from django.urls import reverse
 from . import forms
 from datetime import date, datetime, timedelta
 from . import utils
-
+import markdown
 
 def index(request):
     news = models.News.objects.all()
@@ -212,6 +212,7 @@ def educational_materials(request, grade=None, subject_id=None):
         themes = models.Theme.objects.filter(subject_id=subject_id, grade=grade)
         if themes_id:
             themes = themes.filter(parent_id=themes_id)
+            themes = filter(lambda x:  len(x.lesson_set.all()), themes)
         else:
             themes = themes.filter(parent_id=None)
         data = {'grade': grade, 'object_list': themes}
@@ -220,4 +221,6 @@ def educational_materials(request, grade=None, subject_id=None):
 
 def lesson(request, theme_id):
     lesson = models.Lesson.objects.get(theme__id=theme_id)
+    #esson.text = lesson.text.replace('\n', '<br>')
+    lesson.text = markdown.markdown(lesson.text)
     return render(request, 'education_materials/educational_materials_lesson.html', {'lesson': lesson})
