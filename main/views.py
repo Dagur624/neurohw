@@ -200,11 +200,17 @@ def educational_materials(request, grade=None, subject_id=None):
 
     if not themes_id and not grade and not subject_id:
         data = {'object_list': [{'id': i, 'name': f'{i} Класс'} for i in range(1, 12)]}
+        subjects = models.Subject.objects.prefetch_related('theme_set')
+        themes = set(models.Theme.objects.values_list('grade'))
+        data = {'object_list': [{'id': i[0], 'name': f'{i[0]} Класс'} for i in themes]}
+        data['object_list'].sort(key=lambda x: x['id'])
+        data['object_list'].pop(0)
         return render(request, 'education_materials/educational_materials.html', data)
 
     elif not themes_id and not subject_id:
         subjects = models.Subject.objects.prefetch_related('theme_set')
         subjects = [subject for subject in subjects.all() if subject.theme_set.filter(grade=grade).exists()]
+
         data = {'grade': grade, 'object_list': subjects}
         return render(request, 'education_materials/educational_materials_grade.html', data)
 
@@ -212,7 +218,7 @@ def educational_materials(request, grade=None, subject_id=None):
         themes = models.Theme.objects.filter(subject_id=subject_id, grade=grade)
         if themes_id:
             themes = themes.filter(parent_id=themes_id)
-            themes = filter(lambda x:  len(x.lesson_set.all()), themes)
+            themes = filter(lambda x:  len(x.lesson_set.all()) > 0, themes)
         else:
             themes = themes.filter(parent_id=None)
         data = {'grade': grade, 'object_list': themes}
