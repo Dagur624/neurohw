@@ -3,24 +3,29 @@ html, body {
 }
 
 body {
-    margin: 0px;
+    margin: 0;
     background: whitesmoke;
 }
+
 h1 {
     font-family: Bradley Hand, cursive;
     color: Green;
     font-weight: bold;
     text-align: center;
 }
+
 h3 {
     color: black
 }
+
 p {
     color: black
 }
+
 a {
     color: black;
 }
+
 .floating-button {
     text-decoration: none;
     display: inline-block;
@@ -39,38 +44,54 @@ a {
     background: white;
     box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
     transition: .3s;
-  }
-  .floating-button:hover {
+}
+
+.floating-button:hover {
     background: #2EE59D;
     box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
     color: white;
     transform: translateY(-7px);
-  }
-  .buttonpanel {
+}
+
+.buttonpanel {
     background: linear-gradient(green, whitesmoke);
-  }
-  .tasklist {
-    border:solid black 1px;
+}
+
+.tasklist {
+    border: solid black 1px;
     margin: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
-    padding-left: 10px ;
+    padding-left: 10px;
     box-shadow: 2px 2px gray;
     border-radius: 3px;
-    
-  }
-  .oneLine {
+
+}
+
+.oneLine {
     display: inline-block;
-  }
+}
+
 * {
     font-family: 'Times New Roman', Times, serif;
 }
+
 .task-description {
-  font-size:20px;
+    font-size: 20px;
 }
+
 .videlenie {
-  border: solid 3px black; 
-  width: fit-content; 
-  padding: 3px;
-  margin: 2px
+    border: solid 3px black;
+    width: fit-content;
+    padding: 3px;
+    margin: 2px
+}
+
+.s-t-len {
+    font-size: 30px;
+    font-weight: bold;
+    color: darkred;
+}
+#table {
+    width: auto;
 }

@@ -20,8 +20,8 @@
     {%if user.user_type.code == "student"%}
         <a href="{% url 'student_task_list' 0 %}" class="floating-button">Задания</a>
         <a href="{% url "student_teacher_list" %}" class="floating-button">Мои учителя</a>
-        <a href="" class="floating-button">Результаты</a> 
+        <a href="{% url "student_result"  %}" class="floating-button">Результаты</a>
     {%endif%}
     <a onclick="javascript:history.back(); return false;" class="floating-button">Назад</a>
 </nav>
-{% endblock  %}
+{% endblock %}

@@ -1,9 +1,37 @@
 {% extends 'base.html' %}
-{%block content%}
-    <h1>Классы</h1>
-    {%for item in grades%}
-        <hr>
-        <a href="{%url 'teacher_class' item.id%}" style="color: blue; font-size: 30px; font-weight: bold; text-decoration: none;">{{item.number}} {{item.letter}}</a>
-        
-    {%endfor%}
-{%endblock%}
+{% block content %}
+    <h1>Класс: {{ class.number }}{{ class.letter }}</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Количество заданий</th>
+            <th scope="col" class="table-success">Количество правильных заданий</th>
+            <th scope="col" class="table-danger">Количество неправильных заданий</th>
+            <th scope="col" class="table-warning">Количество непроворенных заданий</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in students %}
+            <tr>
+                <th scope="col">{{ forloop.counter }}</th>
+                <td><a
+                        href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.first_name }}</a>
+                </td>
+                <td><a
+                        href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.last_name }}</a>
+                </td>
+                <td>{{ item.student_tasks_len }}</td>
+                <td class="table-success">{{ item.student_tasks_right }}</td>
+                <td class="table-danger">{{ item.student_tasks_wrong }}</td>
+                <td class="table-warning">{{ item.student_tasks_no_check }}</td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}
