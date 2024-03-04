@@ -1,0 +1,7 @@
+{% block content %}
+    <ul>
+        {% for theme in themes %}
+            <li>Класс: {{ theme.grade }}, {{theme.name}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -147,4 +147,33 @@ def signup(request):
     return render(request, "account/signup.html", {
         'form':form
     })
-# Create your views here.
+# Cr
+# eate your views here.
+
+
+def educational_materials(request, grade=None, subject_id=None):
+    themes_id = request.GET.get('themes_id')
+
+    if not themes_id and not grade and not subject_id:
+        data = {'object_list': [{'id': i, 'name': f'{i} Класс'} for i in range(1, 12)]}
+        return render(request, 'education_materials/educational_materials.html', data)
+
+    elif not themes_id and not subject_id:
+        subjects = models.Subject.objects.prefetch_related('theme_set')
+        subjects = [subject for subject in subjects.all() if subject.theme_set.filter(grade=grade).exists()]
+        data = {'grade': grade, 'object_list': subjects}
+        return render(request, 'education_materials/educational_materials_grade.html', data)
+
+    else:
+        themes = models.Theme.objects.filter(subject_id=subject_id, grade=grade)
+        if themes_id:
+            themes = themes.filter(parent_id=themes_id)
+        else:
+            themes = themes.filter(parent_id=None)
+        data = {'grade': grade, 'object_list': themes}
+        return render(request, 'education_materials/educational_materials_theme.html', data)
+
+
+def lesson(request, theme_id):
+    lesson = models.Lesson.objects.get(theme__id=theme_id)
+    return render(request, 'education_materials/educational_materials_lesson.html', {'lesson': lesson})

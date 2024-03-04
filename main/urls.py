@@ -14,5 +14,11 @@ urlpatterns = [
     path("lk/teacher_classes/student_task/<int:task_id>", views.student_task_teacher, name="student_task_teacher"),
     path("lk/student_task_list/<int:status>", views.student_task_list, name="student_task_list"),
     path("lk/student_task/<int:student_task_id>", views.student_task_do, name="student_task_do"),
-    path("lk/student_teacher_list", views.student_teacher_list, name="student_teacher_list")
+    path("lk/student_teacher_list", views.student_teacher_list, name="student_teacher_list"),
+
+    # Учебный материал
+    path("lk/educational_materials", views.educational_materials, name="educational_materials"),
+    path("lk/educational_materials/<int:grade>", views.educational_materials, name="educational_materials_grade"),
+    path("lk/educational_materials/<int:grade>/<int:subject_id>/", views.educational_materials, name="educational_materials_subject"),
+    path("lk/lesson/<int:theme_id>", views.lesson, name="lesson")
 ]

@@ -89,7 +89,9 @@ class Theme(models.Model):
     name = models.CharField("Название темы", max_length=255, default="")
     code = models.CharField("Код темы", max_length=255, default="")
     subject = models.ForeignKey(Subject, verbose_name="Предмет темы", on_delete= models.CASCADE)
-    parent = models.ForeignKey("Theme", verbose_name= "Родительский объект", null=True, blank=True, on_delete=models.SET_NULL)
+    parent = models.ForeignKey("Theme", verbose_name= "Родительский объект", related_name='child_themes', null=True, blank=True, on_delete=models.SET_NULL)
+    grade = models.IntegerField("Класс", default=0)
+
     def __str__(self) -> str:
         return self.name  
     class Meta:
@@ -130,3 +132,8 @@ class StudentTask(models.Model):
     class Meta:
         verbose_name= 'Задание ученика'
         verbose_name_plural = "Задания учеников"
+
+class Lesson(models.Model):
+    title = models.CharField('Заголовок', max_length=255)
+    text = models.TextField('Текст')
+    theme = models.ForeignKey(Theme, verbose_name='Тема', on_delete=models.SET_NULL, null=True, blank=True)
