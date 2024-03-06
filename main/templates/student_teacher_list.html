@@ -13,8 +13,8 @@
         {% for teacher in teachers %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ teacher.user.first_name }}</td>
                 <td>{{ teacher.user.last_name }}</td>
+                <td>{{ teacher.user.first_name }}</td>
             </tr>
         {% endfor %}
         </tbody>

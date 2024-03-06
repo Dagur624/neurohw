@@ -1,10 +1,45 @@
 {% extends 'base.html' %}
-{%block content%}
+{% block content %}
     <h1>
         Умные задания
     </h1>
-    {%for item in news%}
-        <h3>{{item.title}}</h3>
-        <p>{{item.text}}</p>
-    {%endfor%}
-{%endblock%}
+    <div class="row">
+        <div class="col ps-3">
+
+            <ul class="list-group" style="width: 75%; font-size: 15px;">
+                <li class="list-group-item list-group-item-success" style="font-size: 25px; font-weight: bold">
+                    Возможности
+                </li>
+                <li class="list-group-item">Просмотр своего класса учителями и своих учителей учениками</li>
+                <li class="list-group-item">Теоритические материалы для повторения или самостоятельного изучения</li>
+                <li class="list-group-item">Создание и проверка заданий вручную учителем</li>
+                <li class="list-group-item" style="font-size: 17px; font-weight: bold">Иновационная технология генерации
+                    заданий
+                    и теории
+                    нейронными сетями
+                </li>
+                <li class="list-group-item">Система результативности и её просмотра учениками</li>
+            </ul>
+            <br>
+            <br>
+            <div class="list-group" style="width: 75%">
+                <div class="list-group-item list-group-item-action flex-column align-items-start active">
+
+                    <h5 class="mb-1">Новости</h5>
+                </div>
+                {% for item in news %}
+                    <div class="list-group-item list-group-item-action flex-column align-items-start ">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ item.title }}</h5>
+                            <small>3 days ago</small>
+                        </div>
+                        <p class="mb-1">{{ item.text }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col">
+            <img src="static/images/img.png" style="width: 512px; width: 512px">
+        </div>
+    </div>
+{% endblock %}

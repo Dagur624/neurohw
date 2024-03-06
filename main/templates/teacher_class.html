@@ -18,10 +18,10 @@
             <tr>
                 <th scope="col">{{ forloop.counter }}</th>
                 <td><a
-                        href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.first_name }}</a>
+                        href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.last_name }}</a>
                 </td>
                 <td><a
-                        href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.last_name }}</a>
+                        href="{% url "student_task_list_teacher" item.student.id %}">{{ item.student.user.first_name }}</a>
                 </td>
                 <td>{{ item.student_tasks_len }}</td>
                 <td class="table-success">{{ item.student_tasks_right }}</td>
