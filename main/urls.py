@@ -17,5 +17,8 @@ urlpatterns = [
     path("lk/student_teacher_list", views.student_teacher_list, name="student_teacher_list"),
     path("lk/student_result", views.student_result, name="student_result"),
     #path("lk/student_result/<str:start_date>/<str:end_date>", views.student_result, name="student_result"),
+    path("lk/ai_requests", views.ai_requests, name="ai_requests"),
+
+    path("lk/requests_list", views.requests_list, name="requests_list")
 
 ]

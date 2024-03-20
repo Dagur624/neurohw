@@ -63,3 +63,9 @@ class ResultDateForm(forms.Form):
     end_date = forms.DateField(label="Конечная дата поиска", widget=forms.widgets.DateInput(
         attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control'}))
 
+
+class GenerateForm(forms.ModelForm):
+    class Meta:
+        model = models.AIRequests
+        fields = ("request",)
+

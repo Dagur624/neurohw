@@ -189,4 +189,24 @@ def student_result(request):
         **student_tasks
     })
 
-# Create your views here.
+
+def ai_requests(request):
+    if request.method == "POST":
+        form = forms.GenerateForm(request.POST)
+        if form.is_valid():
+            form_request = form.save(commit=False)
+            form_request.request_user = request.user
+            form_request.save()
+            return redirect(reverse("index"))
+    else:
+        form = forms.GenerateForm()
+    return render(request, "ai_requests.html", {
+        'form': form
+    })
+
+
+def requests_list(request):
+    requests = models.AIRequests.objects.filter(request_user=request.user)
+    return render(request, "requests_list.html", {
+        'requests': requests
+    })
