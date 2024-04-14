@@ -1,10 +1,15 @@
+from django.forms import model_to_dict
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from . import models
 from django.shortcuts import redirect
 from django.urls import reverse
 from . import forms
 from datetime import date, datetime, timedelta
 from . import utils
+import json
 
 
 def index(request):
@@ -210,3 +215,22 @@ def requests_list(request):
     return render(request, "requests_list.html", {
         'requests': requests
     })
+
+
+def get_neurotasks(request):
+    requests = models.AIRequests.objects.filter(ai_answer="")
+    response_list = []
+    for req in requests:
+        response_list.append(model_to_dict(req))
+    return HttpResponse(json.dumps(response_list), content_type="application/json")
+
+
+@csrf_exempt
+def post_neurotasks(request):
+    data = json.loads(request.body)
+    print(data)
+    for item in data:
+        old_req = models.AIRequests.objects.get(id=item['id'])
+        old_req.ai_answer = item['ai_answer']
+        old_req.save()
+    return HttpResponse(status=200)
