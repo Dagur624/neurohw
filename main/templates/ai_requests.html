@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-    <form method="post" class="form-group">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-outline-success">Сохранить</button>
-    </form>
-
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" class="form-group">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-outline-success">Сохранить</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
