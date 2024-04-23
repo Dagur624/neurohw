@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% load bootstrap_tags %}
 {%block content%}
 
 
-    <form method="post">
+    <form method="post" style="width: fit-content">
         
         {%csrf_token%}
-        {{form.as_p}}
-        <button type="submit">Сохранить</button>
+        {{ form|as_bootstrap_inline }}
+        <br>
+        <button type="submit" class="btn btn-outline-success">Сохранить</button>
     </form>
 {%endblock%}

@@ -23,5 +23,7 @@ admin.site.register(models.Subject)
 admin.site.register(models.Task)
 admin.site.register(models.StudentTask)
 admin.site.register(models.Theme)
+admin.site.register(models.AIRequests)
+
 admin.site.register(models.Lesson)
 # Register your models here.

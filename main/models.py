@@ -168,6 +168,21 @@ class StudentTask(models.Model):
         verbose_name = 'Задание ученика'
         verbose_name_plural = "Задания учеников"
 
+
+class AIRequests(models.Model):
+    request_user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+    request = models.TextField("Запрос")
+    human_answer = models.TextField("Ответ человека", default="", blank=True)
+    ai_answer = models.TextField("Ответ нейросети", default="", blank=True)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.request_user.username} - {self.request}"
+
+    class Meta:
+        verbose_name = 'Сгенерированное задание'
+        verbose_name_plural = "Сгенерированные задания"
+
 class Lesson(models.Model):
     title = models.CharField('Заголовок', max_length=255)
     text = models.TextField('Текст')

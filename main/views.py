@@ -1,10 +1,16 @@
+from django.forms import model_to_dict
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from . import models
 from django.shortcuts import redirect
 from django.urls import reverse
 from . import forms
 from datetime import date, datetime, timedelta
 from . import utils
+import json
+
 import markdown
 
 def index(request):
@@ -46,7 +52,6 @@ def teacher_class(request, id):
 
 
 def create_task(request):
-    
     if request.method == "POST":
         print("POST")
         form = forms.CreateTaskForm(request.POST)
@@ -224,6 +229,45 @@ def educational_materials(request, grade=None, subject_id=None):
         data = {'grade': grade, 'object_list': themes}
         return render(request, 'education_materials/educational_materials_theme.html', data)
 
+def ai_requests(request):
+    if request.method == "POST":
+        form = forms.GenerateForm(request.POST)
+        if form.is_valid():
+            form_request = form.save(commit=False)
+            form_request.request_user = request.user
+            form_request.save()
+            return redirect(reverse("index"))
+    else:
+        form = forms.GenerateForm()
+    return render(request, "ai_requests.html", {
+        'form': form
+    })
+
+
+def requests_list(request):
+    requests = models.AIRequests.objects.filter(request_user=request.user)
+    return render(request, "requests_list.html", {
+        'requests': requests
+    })
+
+
+def get_neurotasks(request):
+    requests = models.AIRequests.objects.filter(ai_answer="")
+    response_list = []
+    for req in requests:
+        response_list.append(model_to_dict(req))
+    return HttpResponse(json.dumps(response_list), content_type="application/json")
+
+
+@csrf_exempt
+def post_neurotasks(request):
+    data = json.loads(request.body)
+    print(data)
+    for item in data:
+        old_req = models.AIRequests.objects.get(id=item['id'])
+        old_req.ai_answer = item['ai_answer']
+        old_req.save()
+    return HttpResponse(status=200)
 
 def lesson(request, theme_id):
     lesson = models.Lesson.objects.get(theme__id=theme_id)
