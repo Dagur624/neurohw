@@ -1,28 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{student_task.task.name}}</h1>
+    <h1>{{ student_task.task.name }}</h1>
     <br>
-    
+
     <div class="task_do">
-        <p>{{student_task.task.task_text}}</p>
+        <div class="card" style="margin: 10px; width: fit-content; margin: auto">
+            <div class="card-body">
+                {{ student_task.task.task_text }}
+            </div>
+        </div>
+
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            {% if not student_task.teacher_check and student_task.student_answer != ""%}
+            {% if not student_task.teacher_check and student_task.student_answer != "" %}
                 {% if student_task.student_answer != student_task.task.answer %}
-                    <div>Неправильный ответ.</div>
-                    {% else %}
-                    <div>Правильный ответ!</div>
-                    
+                    <div class="alert alert-danger alert-dismissible fade show" style="padding-right: 16px" role="alert"><strong>Неправильный ответ.</strong>
+                        <button type="button"
+                                style="background-color: Transparent; border: none; float: right;"
+                                data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                    </div>
+                {% else %}
+                    <div class="alert alert-success alert-dismissible fade show" style="padding-right: 16px" role="alert"><strong>Правильный ответ!</strong>
+                        <button type="button"
+                                style="background-color: Transparent; border: none; float: right;"
+                                data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                    </div>
                 {% endif %}
-                
+
                 <a class="btn btn-primary" href="{% url "student_task_do" 0 %}">Следующее задание</a>
-            
+
             {% endif %}
-            <button class="btn btn-primary" type="submit"{% if student_task.teacher_check and student_task.student_answer != "" %} disabled{% endif %}>Сохранить</button>
+            <button class="btn btn-primary" type="submit"
+                    {% if student_task.teacher_check and student_task.student_answer != "" %} disabled{% endif %}>
+                Сохранить
+            </button>
             <a class="btn btn-primary" href="{% url "student_task_list" 0 %}">Вернуться к списку заданий</a>
 
         </form>
     </div>
-    
+
 {% endblock %}

@@ -1,39 +1,44 @@
 {% load static %}
 {% block content %}
 
-    <nav class="navbar navbar-light" style="background: linear-gradient(green, white)">
-        <div class="container-fluid">
-            <a class="navbar-brand fs-1" style="color: white; font-family: 'Arial Black'">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(green, white)">
+        <div class="">
+            <a class="navbar-brand fs-1" style="color: white; font-family: 'Arial Black'" href="{% url 'index' %}">
                 <img src="{% static "images/smartschool.png" %}" alt="" width="60" height="48"
                      class="d-inline-block align-text-top">
                 УМНЫЕ ЗАДАНИЯ
             </a>
         </div>
-        {% if request.path != "/accounts/login/" %}
-            {% if user.is_authenticated %}
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a href="{% url 'index' %}" class="nav-link active" style="">Начало</a>
+                {% if request.path != "/accounts/login/" %}
+                    {% if user.is_authenticated %}
 
 
-                <a href="{% url 'account_logout' %}" class="floating-button">Выйти</a>
+                        <a href="{% url 'account_logout' %}" class="nav-link " style="">Выйти</a>
 
-            {% else %}
-                <a href="{% url 'account_login' %}" class="floating-button">Вход</a>
-            {% endif %}
-        {% endif %}
-        <a href="{% url 'index' %}" class="floating-button">Начало</a>
-        {% if user.user_type.code == "teacher" %}
-            <a href="{% url "ai_requests" %}" class="floating-button">Нейросеть</a>
-            <a href="{% url "requests_list" %}" class="floating-button">Генерации</a>
-            <a href="{% url 'create_task' %}" class="floating-button">Создание</a>
-            <a href="{% url 'teacher_classes' %}" class="floating-button">Классы</a>
-            <a href="{% url "give_task" %}" class="floating-button">Выдача</a>
+                    {% else %}
+                        <a href="{% url 'account_login' %}" class="nav-link" style="">Вход</a>
+                    {% endif %}
+                {% endif %}
 
-        {% endif %}
-        {% if user.user_type.code == "student" %}
-            <a href="{% url 'student_task_list' 0 %}" class="floating-button">Задания</a>
-            <a href="{% url "student_teacher_list" %}" class="floating-button">Мои учителя</a>
-            <a href="{% url "student_result" %}" class="floating-button">Результаты</a>
-        {% endif %}
+                {% if user.user_type.code == "teacher" %}
+                    <a href="{% url "ai_requests" %}" class="nav-link" style="">Нейросеть</a>
+                    <a href="{% url "requests_list" %}" class="nav-link" style="">Генерации</a>
+                    <a href="{% url 'create_task' %}" class="nav-link" style="">Создание</a>
+                    <a href="{% url 'teacher_classes' %}" class="nav-link" style="">Классы</a>
+                    <a href="{% url "give_task" %}" class="nav-link" style="">Выдача</a>
 
-        <a onclick="javascript:history.back(); return false;" class="floating-button">Назад</a>
+                {% endif %}
+                {% if user.user_type.code == "student" %}
+                    <a href="{% url 'student_task_list' 0 %}" class="nav-link" style="">Задания</a>
+                    <a href="{% url "student_teacher_list" %}" class="nav-link" style="">Мои учителя</a>
+                    <a href="{% url "student_result" %}" class="nav-link" style="">Результаты</a>
+                {% endif %}
+
+                <a onclick="javascript:history.back(); return false;" class="nav-link" style="cursor: pointer">Назад</a>
+            </div>
+        </div>
     </nav>
 {% endblock %}

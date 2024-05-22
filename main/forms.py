@@ -4,9 +4,9 @@ from django import forms
 
 
 class CustomSignupForm(SignupForm):
-    first_name = forms.CharField(max_length=255, label="Реальное имя")
-    last_name = forms.CharField(max_length=255, label="Фамилия")
-    phone = forms.CharField(max_length=12, label='Телефон (опционально)', required=False)
+    first_name = forms.CharField(max_length=255, label="Реальное имя", widget=forms.TextInput(attrs={'placeholder': 'Введите ваше имя'}))
+    last_name = forms.CharField(max_length=255, label="Фамилия", widget=forms.TextInput(attrs={'placeholder': 'Введите вашу фамилию'}))
+    phone = forms.CharField(max_length=12, label='Телефон (опционально)', required=False, widget=forms.TextInput(attrs={'placeholder': 'Введите ваш телефон'}))
     user_type = forms.ModelChoiceField(queryset=models.UserType.objects.all(), label="Тип пользователя")
     grade = forms.ModelChoiceField(queryset=models.Grade.objects.all(), label="Класс", required=False)
 
