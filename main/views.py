@@ -21,14 +21,6 @@ def index(request):
     })
 
 
-def lk(request):
-    if not request.user.is_authenticated:
-        return redirect(reverse("index"))
-    if request.user.user_type.code == 'student':
-        return render(request, "lk_student.html")
-    elif request.user.user_type.code == 'teacher':
-
-        return render(request, "lk_teacher.html")
 
 
 def teacher_class_list(request):
@@ -59,7 +51,7 @@ def create_task(request):
         if form.is_valid():
             print("valid")
             form.save()
-            return redirect(reverse("lk"))
+            return redirect(reverse("index"))
     else:
         form = forms.CreateTaskForm()
     return render(request, "create_task.html", {
@@ -78,7 +70,7 @@ def give_task(request):
                                                   teacher=models.Teacher.objects.get(id=request.user.id),
                                                   task_id=student_task_primer.task_id)
                 student_task.save()
-            return redirect(reverse("lk"))
+            return redirect(reverse("index"))
     form = forms.GiveTaskForm()
     return render(request, "create_task.html", {
         "form": form

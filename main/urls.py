@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("lk", views.lk, name="lk"),  # type: ignore
     path("accounts/signup", views.signup, name="signup"),
     path("lk/teacher_classes", views.teacher_class_list, name="teacher_classes"),
     path("lk/teacher_classes/<int:id>", views.teacher_class, name="teacher_class"),
