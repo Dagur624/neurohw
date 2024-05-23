@@ -14,8 +14,10 @@ import json
 
 def index(request):
     news = models.News.objects.all()
+    previous_page = request.META.get('HTTP_REFERER')
     return render(request, "index.html", {
-        "news": news
+        "news": news,
+        "previousPage": previous_page
     })
 
 

@@ -1,5 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
+    <h1>Главная</h1>
+    <br>
+    {% if not user.is_authenticated %}
+        <div class="alert alert-warning mb-2" style="width: fit-content;  padding: 10px; margin:0 auto" role="alert">Вы
+            не
+            вошли. Чтобы просмотреть содержимое сайта <a href="{% url 'account_login' %}"
+                                                         class="btn btn-outline-warning">войдите</a>
+            или, если вы не создали аккаунт, <a href="{% url 'account_signup' %}" class="btn btn-outline-warning">зарегестриуйтесь</a>
+        </div>
+
+    {% else %}
+        {% if previousPage == 'http://127.0.0.1:8000/accounts/login/' %}
+            {% if user.user_type.code == "teacher" %}
+                <div class="alert alert-info alert-dismissible fade show"
+                     style="width: 344px; padding-right: 16px; margin-left: auto; margin-right: auto" role="alert">
+                    Вы вошли как <strong>учитель</strong>.
+                    <button type="button"
+                            style="background-color: Transparent; border: none; float: right; padding-right: 0"
+                            data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif user.user_type.code == "student" %}
+                <div class="alert alert-info alert-dismissible fade show"
+                     style="width: 344px; padding-right: 16px; margin-left: auto; margin-right: auto" role="alert">
+                    Вы вошли как <strong>ученик</strong>.
+                    <button type="button"
+                            style="background-color: Transparent; border: none; float: right; padding-right: 0"
+                            data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
     <div class="row">
         <div class="col ps-3">
 
@@ -19,13 +54,15 @@
             </ul>
             <br>
             <br>
-            <div class="list-group" style="width: 75%">
+
+        </div>
+        <div class="col list-group" style="width: 75%">
 
 
-                <h4 class="mb-1" style="align-self: center">Новости</h4>
-
+            <h3 class="mb-3" style="align-self: center">Новости</h3>
+            <div style="display: flex; align-self: center">
                 {% for item in news %}
-                    <div class="card border-success mb-3" style="width: fit-content">
+                    <div class="card border-success mb-3" style=" margin-right:10px ">
                         <div class="card-header" style="background-color: #d1e7dd">{{ item.date }}</div>
                         <div class="card-body">
                             <h5 class=" card-title">{{ item.title }}</h5>
@@ -33,11 +70,9 @@
                         </div>
 
                     </div>
+
                 {% endfor %}
             </div>
-        </div>
-        <div class="col">
-            <img src="static/images/img.png" style="width: 512px; width: 512px">
         </div>
     </div>
 {% endblock %}

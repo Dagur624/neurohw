@@ -153,4 +153,4 @@ MIDDLEWARE = (
     # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
 )
-LOGIN_REDIRECT_URL = 'lk'
+LOGIN_REDIRECT_URL = 'index'
