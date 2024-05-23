@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load allauth i18n %}
+{% block head_title %}
+    {% trans "Sign Out" %}
+{% endblock head_title %}
+{% block content %}
+    <div class="mx-1">
+    {% element h1 %}
+        {% trans "Sign Out" %}
+    {% endelement %}
+    <div role="alert" class="alert alert-warning" style="display: flex; padding: 10px; width: fit-content">
+    <div style="margin-top: auto; margin-bottom: auto">{% trans 'Are you sure you want to sign out?' %}</div>
+    {% url 'account_logout' as action_url %}
+    {% element form method="post" action=action_url no_visible_fields=True %}
+        {% slot body %}
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}" />
+            {% endif %}
+        {% endslot %}
+        {% slot actions %}
+            <button type="submit" class="btn btn-outline-warning" style="margin-left: 10px">Выйти</button>
+        {% endslot %}
+    {% endelement %}
+    </div>
+    </div>
+{% endblock content %}
