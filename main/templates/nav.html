@@ -32,6 +32,7 @@
 
                 {% endif %}
                 {% if user.user_type.code == "student" %}
+                    <a href="{% url "ai_books_list" %}" class="nav-link">Теория</a>
                     <a href="{% url 'student_task_list' 0 %}" class="nav-link" style="">Задания</a>
                     <a href="{% url "student_teacher_list" %}" class="nav-link" style="">Мои учителя</a>
                     <a href="{% url "student_result" %}" class="nav-link" style="">Результаты</a>

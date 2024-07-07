@@ -21,8 +21,6 @@ def index(request):
     })
 
 
-
-
 def teacher_class_list(request):
     grades = models.Grade.objects.all()
     return render(request, "teacher_class_list.html", {
@@ -222,9 +220,35 @@ def get_neurotasks(request):
 @csrf_exempt
 def post_neurotasks(request):
     data = json.loads(request.body)
-    print(data)
     for item in data:
         old_req = models.AIRequests.objects.get(id=item['id'])
         old_req.ai_answer = item['ai_answer']
         old_req.save()
     return HttpResponse(status=200)
+
+
+def ai_books_list(request):
+    if request.method == "POST":
+        form = forms.BookListFilterForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data["subject"]
+            theme = form.cleaned_data["theme"]
+            if subject:
+                titles = models.AIBooks.objects.filter(theme__subject__id=subject)
+            if theme:
+                if subject == "":
+                    titles = models.AIBooks.objects.filter(theme__id=theme)
+                else:
+                    if models.Theme.objects.get(id=theme).subject == models.Subject.objects.get(id=subject):
+                        titles = models.AIBooks.objects.filter(theme__id=theme)
+            if subject == "" and theme == "":
+                titles = models.AIBooks.objects.all()
+    else:
+        form = forms.BookListFilterForm()
+        titles = models.AIBooks.objects.all()
+    return render(request, "ai_books_list.html", {"form": form, "titles": titles})
+
+
+def ai_book(request, book_id):
+    book = models.AIBooks.objects.get(id = book_id)
+    return render(request, "ai_book.html", {"book": book})

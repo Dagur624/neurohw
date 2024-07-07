@@ -4,9 +4,12 @@ from django import forms
 
 
 class CustomSignupForm(SignupForm):
-    first_name = forms.CharField(max_length=255, label="Реальное имя", widget=forms.TextInput(attrs={'placeholder': 'Введите ваше имя'}))
-    last_name = forms.CharField(max_length=255, label="Фамилия", widget=forms.TextInput(attrs={'placeholder': 'Введите вашу фамилию'}))
-    phone = forms.CharField(max_length=12, label='Телефон (опционально)', required=False, widget=forms.TextInput(attrs={'placeholder': 'Введите ваш телефон'}))
+    first_name = forms.CharField(max_length=255, label="Реальное имя",
+                                 widget=forms.TextInput(attrs={'placeholder': 'Введите ваше имя'}))
+    last_name = forms.CharField(max_length=255, label="Фамилия",
+                                widget=forms.TextInput(attrs={'placeholder': 'Введите вашу фамилию'}))
+    phone = forms.CharField(max_length=12, label='Телефон (опционально)', required=False,
+                            widget=forms.TextInput(attrs={'placeholder': 'Введите ваш телефон'}))
     user_type = forms.ModelChoiceField(queryset=models.UserType.objects.all(), label="Тип пользователя")
     grade = forms.ModelChoiceField(queryset=models.Grade.objects.all(), label="Класс", required=False)
 
@@ -73,3 +76,14 @@ class GenerateForm(forms.ModelForm):
         super(GenerateForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control '
+
+
+class BookListFilterForm(forms.Form):
+    CHOICE_LIST = [
+        ("", "----"),
+    ]
+    subject_list = list(models.Subject.objects.values_list('id', 'name'))
+    theme_list = list(models.Theme.objects.values_list('id', 'name'))
+    subject = forms.ChoiceField(label="Предметы", choices=CHOICE_LIST + subject_list,
+                                required=False)
+    theme = forms.ChoiceField(label="Темы", choices=CHOICE_LIST + theme_list, required=False)

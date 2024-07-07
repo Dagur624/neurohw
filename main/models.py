@@ -181,3 +181,16 @@ class AIRequests(models.Model):
     class Meta:
         verbose_name = 'Сгенерированное задание'
         verbose_name_plural = "Сгенерированные задания"
+
+
+class AIBooks(models.Model):
+    theme = models.ForeignKey(Theme, verbose_name="Тема", on_delete=models.CASCADE)
+    title = models.CharField("Заголовок", max_length=255)
+    text = models.TextField("Текст")
+
+    def __str__(self) -> str:
+        return f"{self.theme.subject.name} - {self.theme.name} - {self.title}"
+
+    class Meta:
+        verbose_name = "Теория темы"
+        verbose_name_plural = "Теории темы"

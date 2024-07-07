@@ -21,5 +21,7 @@ urlpatterns = [
 
     path("lk/requests_list", views.requests_list, name="requests_list"),
     path("api/get_neurotasks", views.get_neurotasks, name="get_neurotasks"),
-    path("api/post_neurotasks", views.post_neurotasks, name="post_neurotasks")
+    path("api/post_neurotasks", views.post_neurotasks, name="post_neurotasks"),
+    path("lk/ai_books_list", views.ai_books_list, name="ai_books_list"),
+    path("lk/ai_books_list/ai_book/<int:book_id>", views.ai_book, name="ai_book")
 ]
