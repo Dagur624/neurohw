@@ -1,25 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
+    <head>
+        {{ form.media.css }}
+    </head>
     <h1>Теория</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+
         <button type="submit" class="btn btn-outline-success">Отфильтровать</button>
 
     </form>
     <div class="row p-1">
         {% for title in titles %}
             <div class="col-auto">
-                <div class="card" style="width: 300px">
+                <div class="card shadow "  style="width: 290px; margin-bottom: 30px; height:430px">
 
                     <div class="card-body">
-                        <h3 class="card-title">{{ title.title }}</h3>
-                        <h5 class="card-title">{{ title.theme }} - {{ title.theme.subject }}</h5>
-                        <p class="card-text">{{ title.text |truncatechars:50}}</p>
-                        <a href="{% url 'ai_book' title.id %}" class="card-link">Card link</a>
+                        <h3 class="card-title">{{ title.theme }}</h3>
+                        <h5 class="card-title">{{ title.theme.subject }}</h5>
+                        <p class="card-text">{{ title.text |striptags|truncatechars:50}}</p>
+                        <a href="{% url 'ai_book' title.id %}" class="card-link">Подробнее</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{ form.media.js }}
 {% endblock %}

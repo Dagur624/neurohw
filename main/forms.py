@@ -1,7 +1,8 @@
 from allauth.account.forms import SignupForm
 from . import models
 from django import forms
-
+from dal import autocomplete
+from django_select2 import forms as s2forms
 
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=255, label="Реальное имя",
@@ -78,6 +79,7 @@ class GenerateForm(forms.ModelForm):
             visible.field.widget.attrs['class'] = 'form-control '
 
 
+
 class BookListFilterForm(forms.Form):
     CHOICE_LIST = [
         ("", "----"),
@@ -86,4 +88,4 @@ class BookListFilterForm(forms.Form):
     theme_list = list(models.Theme.objects.values_list('id', 'name'))
     subject = forms.ChoiceField(label="Предметы", choices=CHOICE_LIST + subject_list,
                                 required=False)
-    theme = forms.ChoiceField(label="Темы", choices=CHOICE_LIST + theme_list, required=False)
+    theme = forms.ChoiceField(label="Темы", choices=CHOICE_LIST + theme_list, required=False, widget=s2forms.Select2Widget)

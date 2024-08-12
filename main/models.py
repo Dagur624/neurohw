@@ -185,7 +185,7 @@ class AIRequests(models.Model):
 
 class AIBooks(models.Model):
     theme = models.ForeignKey(Theme, verbose_name="Тема", on_delete=models.CASCADE)
-    title = models.CharField("Заголовок", max_length=255)
+    title = models.CharField("Заголовок", max_length=255, blank=True, null=True, default="")
     text = models.TextField("Текст")
 
     def __str__(self) -> str:

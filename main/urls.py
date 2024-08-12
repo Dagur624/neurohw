@@ -1,6 +1,7 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
+from .views_api import ThemeAutocomplete
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -18,10 +19,16 @@ urlpatterns = [
     path("lk/student_result", views.student_result, name="student_result"),
     # path("lk/student_result/<str:start_date>/<str:end_date>", views.student_result, name="student_result"),
     path("lk/ai_requests", views.ai_requests, name="ai_requests"),
-
     path("lk/requests_list", views.requests_list, name="requests_list"),
+    path("lk/ai_books_list", views.ai_books_list, name="ai_books_list"),
+    path("lk/ai_books_list/ai_book/<int:book_id>", views.ai_book, name="ai_book"),
+    path("not_pc", views.index_not_pc, name="index_not_pc"),
+    # api
     path("api/get_neurotasks", views.get_neurotasks, name="get_neurotasks"),
     path("api/post_neurotasks", views.post_neurotasks, name="post_neurotasks"),
-    path("lk/ai_books_list", views.ai_books_list, name="ai_books_list"),
-    path("lk/ai_books_list/ai_book/<int:book_id>", views.ai_book, name="ai_book")
+    path("api/get_neurothemes", views.get_neurothemes, name="get_neurothemes"),
+    path("api/post_neurothemes", views.post_neurothemes, name="post_neurothemes"),
+    # form_autocomplete
+    path("select2/", include("django_select2.urls")),
+
 ]

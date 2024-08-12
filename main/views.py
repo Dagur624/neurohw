@@ -15,6 +15,8 @@ import json
 def index(request):
     news = models.News.objects.all()
     previous_page = request.META.get('HTTP_REFERER')
+    if not request.user_agent.is_pc:
+        return redirect(reverse("index_not_pc"))
     return render(request, "index.html", {
         "news": news,
         "previousPage": previous_page
@@ -250,5 +252,38 @@ def ai_books_list(request):
 
 
 def ai_book(request, book_id):
-    book = models.AIBooks.objects.get(id = book_id)
+    book = models.AIBooks.objects.get(id=book_id)
     return render(request, "ai_book.html", {"book": book})
+
+
+def index_not_pc(request):
+    return render(request, "index_not_pc.html")
+
+
+def get_neurothemes(request):
+    themes = models.Theme.objects.exclude(parent=None)
+    theme_list = []
+    for theme in themes:
+        if models.Theme.objects.filter(parent=theme).exists():
+            continue
+        if models.AIBooks.objects.filter(theme=theme).exists():
+            continue
+        dict_theme = model_to_dict(theme)
+        dict_theme["subject"] = theme.subject.name
+        theme_list.append(dict_theme)
+    return HttpResponse(json.dumps(theme_list), content_type="application/json")
+
+
+@csrf_exempt
+def post_neurothemes(request):
+    data = json.loads(request.body)
+    for item in data:
+            themes = models.Theme.objects.filter(name=item["name"])
+            if len(themes) > 1:
+                themes[1].delete()
+
+            new_theory = models.AIBooks(theme=themes[0], text=item["theory_content"])
+            new_theory.save()
+    return HttpResponse(status=200)
+
+
