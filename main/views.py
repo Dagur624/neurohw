@@ -127,21 +127,27 @@ def student_task_do(request, student_task_id=0):
         student_task = models.StudentTask.objects.filter(student__user__id=request.user.id, student_answer="").first()
         if not student_task:
             return redirect(reverse('student_task_list', args=[0]))
+    is_right = student_task.is_right
     if request.method == "POST":
         form = forms.DoTaskForm(request.POST, instance=student_task)
         if form.is_valid():
+            if student_task.student_answer != "":
+                return redirect(reverse("student_task_list", args=[0]))
             save_task = form.save(commit=False)
+
             if not save_task.teacher_check:
 
-                if save_task.student_answer == save_task.task.answer:
+                if save_task.student_answer.lower() == save_task.task.answer.lower():
                     save_task.is_right = True
                 else:
                     save_task.is_right = False
+            is_right = save_task.is_right
             save_task.save()
     form = forms.DoTaskForm(instance=student_task)
     return render(request, "student_task_do.html", {
         "student_task": student_task,
-        "form": form
+        "form": form,
+        "is_right": is_right
     })
 
 

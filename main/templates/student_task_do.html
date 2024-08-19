@@ -14,8 +14,8 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if not student_task.teacher_check and student_task.student_answer != "" %}
-                    {% if student_task.student_answer != student_task.task.answer %}
-                        <div class="alert alert-danger alert-dismissible fade show" style="padding-right: 16px"
+                    {% if not is_right %}
+                        <div class="alert alert-danger alert-dismissible fade show" style="padding-right: 16px; width: 500px;"
                              role="alert"><strong>Неправильный ответ.</strong>
                             <button type="button"
                                     style="background-color: Transparent; border: none; float: right;"
@@ -36,7 +36,7 @@
 
                 {% endif %}
                 <button class="btn btn-primary" type="submit"
-                        {% if student_task.teacher_check and student_task.student_answer != "" %} disabled{% endif %}>
+                        {% if student_task.student_answer != "" %} disabled{% endif %}>
                     Сохранить
                 </button>
                 <a class="btn btn-primary" href="{% url "student_task_list" 0 %}">Вернуться к списку заданий</a>

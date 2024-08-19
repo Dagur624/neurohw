@@ -4,8 +4,14 @@
         <div class="col-md-6">
             <form method="post" class="form-group">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-outline-success">Сохранить</button>
+                {% for field in form %}
+                    <div class="input-group">
+                        {{ field.errors }}
+                        <span class="input-group-text" id ="{{ field.id_for_label }}" >Запрос к нейросети</span>
+                        <textarea name="request" cols="40" rows="2" class="form-control" required="" id="{{ field.auto_id }}"></textarea>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-outline-success" style="margin-top: 5px">Сохранить</button>
             </form>
         </div>
     </div>

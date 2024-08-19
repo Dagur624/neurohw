@@ -11,17 +11,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a href="{% url 'index' %}" class="nav-link active" style="">Начало</a>
-                {% if request.path != "/accounts/login/" %}
-                    {% if user.is_authenticated %}
-
-
-                        <a href="{% url 'account_logout' %}" class="nav-link " style="">Выйти</a>
-
-                    {% else %}
-                        <a href="{% url 'account_login' %}" class="nav-link" style="">Вход</a>
-                    {% endif %}
-                {% endif %}
+                <a onclick="javascript:history.back(); return false;" class="nav-link" style="cursor: pointer"><i class="bi bi-arrow-left" style="color: white; font-weight: bolder"></i></a>
 
                 {% if user.user_type.code == "teacher" %}
                     <a href="{% url "ai_requests" %}" class="nav-link" style="">Нейросеть</a>
@@ -37,8 +27,17 @@
                     <a href="{% url "student_teacher_list" %}" class="nav-link" style="">Мои учителя</a>
                     <a href="{% url "student_result" %}" class="nav-link" style="">Результаты</a>
                 {% endif %}
+                {% if request.path != "/accounts/login/" %}
+                    {% if user.is_authenticated %}
 
-                <a onclick="javascript:history.back(); return false;" class="nav-link" style="cursor: pointer">Назад</a>
+
+                        <a href="{% url 'account_logout' %}" class="nav-link " style="">Выйти</a>
+
+                    {% else %}
+                        <a href="{% url 'account_login' %}" class="nav-link" style="">Вход</a>
+                    {% endif %}
+                {% endif %}
+
             </div>
         </div>
     </nav>
