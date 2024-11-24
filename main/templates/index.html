@@ -2,11 +2,11 @@
 {% block content %}
     <h1>Главная</h1>
     {% if not user.is_authenticated %}
-        <div class="alert alert-warning mb-2" style="width: fit-content;  padding: 10px; margin:0 auto" role="alert"><p>Вы
+        <div class="alert alert-warning mb-2" style="width: fit-content;  padding: 10px; margin:0 auto 0 !important;" role="alert">Вы
             не
-            вошли. Чтобы просмотреть содержимое сайта <a href="{% url 'account_login' %}"
-                                                         class="btn btn-outline-warning">войдите</a>
-            или, если вы не создали аккаунт, <a href="{% url 'account_signup' %}" class="btn btn-outline-warning">зарегестриуйтесь</a>
+            вошли. Чтобы просмотреть содержимое сайта, <a href="{% url 'account_login' %}"
+                                                         class="link-success link-offset-1">войдите</a>
+            или, если вы не создали аккаунт, <a href="{% url 'account_signup' %}" class="link-success link-offset-1">зарегестриуйтесь</a>
         </div>
 
     {% else %}

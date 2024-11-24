@@ -153,7 +153,6 @@ def student_task_do(request, student_task_id=0):
 
 def student_teacher_list(request):
     teachers = models.Teacher.objects.all()
-    print(teachers)
     return render(request, "student_teacher_list.html", {
         "teachers": teachers
     })

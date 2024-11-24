@@ -7,7 +7,7 @@
                 {% for field in form %}
                     <div class="input-group">
                         {{ field.errors }}
-                        <span class="input-group-text" id ="{{ field.id_for_label }}" >Запрос к нейросети</span>
+                        <span class="input-group-text" style="font-weight: bold;" id ="{{ field.id_for_label }}" >Запрос к нейросети</span>
                         <textarea name="request" cols="40" rows="2" class="form-control" required="" id="{{ field.auto_id }}"></textarea>
                     </div>
                 {% endfor %}
